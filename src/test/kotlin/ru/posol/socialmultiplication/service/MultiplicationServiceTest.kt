@@ -7,16 +7,23 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.junit4.SpringRunner
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
-@RunWith(SpringRunner::class)
-@SpringBootTest
 class MultiplicationServiceTest {
 
-    @MockBean
+    @Mock
     lateinit var randomGeneratorService: RandomGeneratorService
 
-    @MockBean
-    lateinit var multiplicationService: MultiplicationService
+    lateinit var multiplicationServiceImpl: MultiplicationServiceImpl
+
+    @Before
+    fun setUp() {
+        // With this call to initMocks we tell Mockito to process the annotations
+        MockitoAnnotations.initMocks(this)
+        multiplicationServiceImpl = MultiplicationServiceImpl(randomGeneratorService);
+    }
 
     @Test
     fun createRandomMultiplicationTest() {
@@ -24,7 +31,7 @@ class MultiplicationServiceTest {
         given(randomGeneratorService.generateRandomFactor()).willReturn(50, 30);
 
         // when
-        val multiplication = multiplicationService.createRandomMultiplication()
+        val multiplication = multiplicationServiceImpl.createRandomMultiplication()
 
         // then
         assertThat(multiplication.factorA).isEqualTo(50)
