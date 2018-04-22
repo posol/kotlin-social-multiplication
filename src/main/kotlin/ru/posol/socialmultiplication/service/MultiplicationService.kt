@@ -1,16 +1,23 @@
 package ru.posol.socialmultiplication.service
 
 import ru.posol.socialmultiplication.domain.Multiplication
+import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
+
 
 interface MultiplicationService {
 
     /**
-     * Creates a Multiplication object with two randomlygenerated
-    factors
-     * between 11 and 99.
+     * Generates a random {@link Multiplication} object.
      *
-     * @return a Multiplication object with random factors
+     * @return a multiplication of randomly generated numbers
      */
     fun createRandomMultiplication(): Multiplication
+
+    /**
+     * @return true if the attempt matches the result of the
+     * multiplication, false otherwise.
+     */
+    fun checkAttempt(resultAttempt: MultiplicationResultAttempt): Boolean
+
 
 }

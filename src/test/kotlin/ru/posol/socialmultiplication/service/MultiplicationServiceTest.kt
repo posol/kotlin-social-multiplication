@@ -1,15 +1,14 @@
 package ru.posol.socialmultiplication.service
 
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.BDDMockito.given
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.test.context.junit4.SpringRunner
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
+import org.junit.Test
+import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import ru.posol.socialmultiplication.domain.Multiplication
+import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
+import ru.posol.socialmultiplication.domain.User
 
 class MultiplicationServiceTest {
 
@@ -37,6 +36,34 @@ class MultiplicationServiceTest {
         assertThat(multiplication.factorA).isEqualTo(50)
         assertThat(multiplication.factorB).isEqualTo(30)
         assertThat(multiplication.result).isEqualTo(1500)
+    }
+
+    @Test
+    fun checkCorrectAttemptTest() {
+        // given
+        val multiplication = Multiplication(50, 60)
+        val user = User("posol")
+        val attempt = MultiplicationResultAttempt(user, multiplication, 3000)
+
+        // when
+        val attemptResult = multiplicationServiceImpl.checkAttempt(attempt)
+
+        // assert
+        assertThat(attemptResult).isTrue()
+    }
+
+    @Test
+    fun checkWrongAttemptTest() {
+        // given
+        val multiplication = Multiplication(50, 60)
+        val user = User("posol")
+        val attempt = MultiplicationResultAttempt(user, multiplication, 3010)
+
+        // when
+        val attemptResult = multiplicationServiceImpl.checkAttempt(attempt)
+
+        // assert
+        assertThat(attemptResult).isFalse()
     }
 
 }

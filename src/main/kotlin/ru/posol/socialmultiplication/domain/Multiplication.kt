@@ -1,9 +1,9 @@
 package ru.posol.socialmultiplication.domain
 
 /**
- * This class represents a Multiplication in our application.
+ * This represents a Multiplication (a * b).
  */
-class Multiplication(val factorA: Int, val factorB: Int) {
+class Multiplication(val factorA: Int = 0, val factorB: Int = 0) {
 
     // The result of the operation A * B
     val result: Int
