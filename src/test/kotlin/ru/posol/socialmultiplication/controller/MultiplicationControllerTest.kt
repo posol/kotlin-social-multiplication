@@ -38,7 +38,7 @@ class MultiplicationControllerTest {
     }
 
     @Test
-    fun checkCorrectAttemptTest() {
+    fun getRandomMultiplicationTest() {
         // given
         given(multiplicationService.createRandomMultiplication()).willReturn(Multiplication(70, 20))
 
