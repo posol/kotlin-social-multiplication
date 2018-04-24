@@ -10,7 +10,7 @@ import ru.posol.socialmultiplication.domain.Multiplication
 import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
 import ru.posol.socialmultiplication.domain.User
 
-class MultiplicationServiceTest {
+class MultiplicationServiceImplTest {
 
     @Mock
     lateinit var randomGeneratorService: RandomGeneratorService

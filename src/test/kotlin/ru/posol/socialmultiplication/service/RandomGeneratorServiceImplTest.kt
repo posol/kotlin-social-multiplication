@@ -3,11 +3,9 @@ package ru.posol.socialmultiplication.service
 import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
-import org.slf4j.LoggerFactory
-import ru.posol.socialmultiplication.SocialMultiplicationApplication
 
 
-class RandomGeneratorServiceTest {
+class RandomGeneratorServiceImplTest {
 
     lateinit var randomGeneratorServiceImpl: RandomGeneratorService
 

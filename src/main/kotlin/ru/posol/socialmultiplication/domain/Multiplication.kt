@@ -12,10 +12,6 @@ class Multiplication(val factorA: Int = 0, val factorB: Int = 0) {
         result = factorA * factorB
     }
 
-
-    override fun toString(): String {
-        return "Multiplication(factorA=$factorA, factorB=$factorB, result=$result)"
-    }
-
+    override fun toString() = "Multiplication(factorA=$factorA, factorB=$factorB, result=$result)"
 
 }

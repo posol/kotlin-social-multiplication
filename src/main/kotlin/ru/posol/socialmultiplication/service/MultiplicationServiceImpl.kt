@@ -7,7 +7,6 @@ import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
 
 @Service
 class MultiplicationServiceImpl(@Autowired val randomGeneratorService: RandomGeneratorService) : MultiplicationService {
-//class MultiplicationServiceImpl @Autowired constructor( val randomGeneratorService: RandomGeneratorService) : MultiplicationService {
 
     override fun createRandomMultiplication(): Multiplication {
         val factA = randomGeneratorService.generateRandomFactor()
@@ -16,6 +15,6 @@ class MultiplicationServiceImpl(@Autowired val randomGeneratorService: RandomGen
     }
 
     override fun checkAttempt(resultAttempt: MultiplicationResultAttempt): Boolean {
-       return resultAttempt.resultAttempt == resultAttempt.multiplication.result
+        return resultAttempt.resultAttempt == resultAttempt.multiplication.result
     }
 }

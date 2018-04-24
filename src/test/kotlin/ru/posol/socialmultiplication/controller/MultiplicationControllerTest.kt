@@ -1,7 +1,7 @@
 package ru.posol.socialmultiplication.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.Assert
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,14 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.json.JacksonTester
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import ru.posol.socialmultiplication.domain.Multiplication
 import ru.posol.socialmultiplication.service.MultiplicationService
-import org.assertj.core.api.Assertions.assertThat
-import org.springframework.http.HttpStatus
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(MultiplicationController::class)
@@ -43,12 +42,11 @@ class MultiplicationControllerTest {
         given(multiplicationService.createRandomMultiplication()).willReturn(Multiplication(70, 20))
 
         // when
-        val response = mvc.perform( get("/multiplications/random").accept(MediaType.APPLICATION_JSON)).
-                andReturn().response
-
+        val response = mvc.perform(get("/multiplications/random").
+                accept(MediaType.APPLICATION_JSON)).andReturn().response
         // then
         assertThat(response.status).isEqualTo(HttpStatus.OK.value())
-        assertThat(response.contentAsString).isEqualTo(json.write(Multiplication(70,20)).json)
+        assertThat(response.contentAsString).isEqualTo(json.write(Multiplication(70, 20)).json)
     }
 
 }
