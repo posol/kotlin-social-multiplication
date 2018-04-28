@@ -23,7 +23,6 @@ fun init(): CommandLineRunner {
 
 fun main(args: Array<String>) {
     val test = Multiplication(1, 2)
-    logger.error("test - ${test.result}");
     logger.error("test - $test");
     runApplication<SocialMultiplicationApplication>(*args)
 }

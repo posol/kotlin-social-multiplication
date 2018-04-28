@@ -1,37 +1,21 @@
 package ru.posol.socialmultiplication.domain
 
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+
 /**
  * This represents a Multiplication (a * b).
  */
-class Multiplication(val factorA: Int = 0, val factorB: Int = 0) {
+@Entity
+data class Multiplication(
 
-    // The result of the operation A * B
-    val result: Int
+        val factorA: Int = 0,
+        val factorB: Int = 0,
 
-    init {
-        result = factorA * factorB
-    }
-
-    override fun toString() = "Multiplication(factorA=$factorA, factorB=$factorB, result=$result)"
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Multiplication
-
-        if (factorA != other.factorA) return false
-        if (factorB != other.factorB) return false
-        if (result != other.result) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result1 = factorA
-        result1 = 31 * result1 + factorB
-        result1 = 31 * result1 + result
-        return result1
-    }
-
-}
+        @Id
+        @GeneratedValue
+        @Column(name = "MULTIPLICATION_ID")
+        val id: Long = -1
+)

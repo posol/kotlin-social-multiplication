@@ -19,5 +19,6 @@ interface MultiplicationService {
      */
     fun checkAttempt(resultAttempt: MultiplicationResultAttempt): Boolean
 
+    fun getStatsForUser(userAlias: String): List<MultiplicationResultAttempt>
 
 }
