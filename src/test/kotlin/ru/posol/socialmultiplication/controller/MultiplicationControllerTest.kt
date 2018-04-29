@@ -46,14 +46,7 @@ class MultiplicationControllerTest {
                 accept(MediaType.APPLICATION_JSON)).andReturn().response
         // then
         assertThat(response.status).isEqualTo(HttpStatus.OK.value())
-        //assertThat(response.contentAsString).isEqualTo(json.write(Multiplication(70, 20)).json)
-        // Expected :"{"result":1400,"factorA":70,"factorB":20}"
-        // Actual   :"{"factorA":70,"factorB":20,"result":1400}"
-        //FIXME поправить эту хрень
-        val restResponse = json.parse((response.contentAsString)).`object`
-        val waitingResult = Multiplication(70, 20)
-        assertThat(restResponse).isEqualTo(waitingResult)
-
+        assertThat(response.contentAsString).isEqualTo(json.write(Multiplication(70, 20)).json)
     }
 
 }

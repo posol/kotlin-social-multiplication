@@ -74,7 +74,7 @@ class MultiplicationResultAttemptControllerTest {
         // given
         val user = User(alias = "posol")
         val multiplication = Multiplication(50, 70)
-        val attempt = MultiplicationResultAttempt(user = user, multiplication = multiplication, resultAttempt = 3500)
+        val attempt = MultiplicationResultAttempt(user = user, multiplication = multiplication, resultAttempt = 3500,correct = correct)
         val copyAttempt = attempt.copy()
 
         // checkAttempt function is only taking a Non-Null parameter! However, in Mockito, any() will
