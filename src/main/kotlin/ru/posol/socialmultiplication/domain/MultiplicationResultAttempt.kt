@@ -10,7 +10,7 @@ import javax.persistence.*
 data class MultiplicationResultAttempt(
         @Id
         @GeneratedValue
-        val id: Long = -1,
+        val id: Long = 0,
 
         @ManyToOne(cascade = arrayOf(CascadeType.PERSIST))
         @JoinColumn(name = "USER_ID")

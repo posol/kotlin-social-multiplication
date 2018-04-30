@@ -17,5 +17,5 @@ data class Multiplication(
         @Id
         @GeneratedValue
         @Column(name = "MULTIPLICATION_ID")
-        val id: Long = -1
+        val id: Long = 0
 )

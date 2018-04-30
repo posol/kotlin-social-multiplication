@@ -13,7 +13,7 @@ data class User(
         @Id
         @GeneratedValue
         @Column(name = "USER_ID")
-        val id: Long = -1,
+        val id: Long = 0,
 
         val alias: String = "guest"
 )
