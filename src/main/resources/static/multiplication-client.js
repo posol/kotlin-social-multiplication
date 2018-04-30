@@ -1,20 +1,3 @@
-function updateStats(alias) {
-    $.ajax({
-        url: "http://localhost:8080/results?alias=" + alias,
-    }).then(function (data) {
-        $('#stats-body').empty();
-        data.forEach(function (row) {
-            $('#stats-body').append('<tr><td>' + row.id +
-                '</td>' +
-                '<td>' + row.multiplication.factorA + ' x ' +
-                row.multiplication.factorB + '</td>' +
-                '<td>' + row.resultAttempt + '</td>' +
-                '<td>' + (row.correct === true ? 'YES' : 'NO')
-                + '</td></tr>');
-        });
-    });
-}
-
 function updateMultiplication() {
     $.ajax({
         url: "http://localhost:8080/multiplications/random"
@@ -28,23 +11,44 @@ function updateMultiplication() {
     });
 }
 
+function updateStats(alias) {
+    $.ajax({
+        url: "http://localhost:8080/results?alias=" + alias,
+    }).then(function (data) {
+        $('#stats-body').empty();
+        console.log(data);
+        data.forEach(function (row) {
+            $('#stats-body').append('<tr><td>' + row.id + '</td>' +
+                '<td>' + row.multiplication.factorA + ' x ' + row.multiplication.factorB + '</td>' +
+                '<td>' + row.resultAttempt + '</td>' +
+                '<td>' + (row.correct === true ? 'YES' : 'NO') + '</td></tr>');
+        });
+    });
+}
+
 $(document).ready(function () {
+
     updateMultiplication();
+
     $("#attempt-form").submit(function (event) {
+
         // Don't submit the form normally
         event.preventDefault();
+
         // Get some values from elements on the page
         var a = $('.multiplication-a').text();
         var b = $('.multiplication-b').text();
         var $form = $(this),
-            attempt = $form.find("input[name='resultattempt']").val(),
+            attempt = $form.find("input[name='result-attempt']").val(),
             userAlias = $form.find("input[name='user-alias']").val();
+
         // Compose the data in the format that the API is expecting
         var data = {
-            user: {alias: userAlias}, multiplication:
-                {factorA: a, factorB: b}, resultAttempt: attempt
+            user: {alias: userAlias},
+            multiplication: {factorA: a, factorB: b},
+            resultAttempt: attempt
         };
-        // Send the data using post
+        console.log(data);
         // Send the data using post
         $.ajax({
             url: '/results',
@@ -55,13 +59,15 @@ $(document).ready(function () {
             async: false,
             success: function (result) {
                 if (result.correct) {
-                    $('.result-message').empty().append("The result iscorrect! Congratulations!");
+                    $('.result-message').empty().append("The result is correct! Congratulations!");
                 } else {
-                    $('.result-message').empty().append("Oops that'snot correct! But keep trying!");
+                    $('.result-message').empty().append("Ooops that's not correct! But keep trying!");
                 }
             }
         });
+
         updateMultiplication();
+
         updateStats(userAlias);
     });
 });
