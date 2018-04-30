@@ -14,11 +14,11 @@ data class MultiplicationResultAttempt(
 
         @ManyToOne(cascade = arrayOf(CascadeType.PERSIST))
         @JoinColumn(name = "USER_ID")
-        val user: User,
+        val user: User = User(),
 
         @ManyToOne(cascade = arrayOf(CascadeType.PERSIST))
         @JoinColumn(name = "MULTIPLICATION_ID")
-        val multiplication: Multiplication,
+        val multiplication: Multiplication = Multiplication(),
 
         val resultAttempt: Int = -1,
         val correct: Boolean = false
