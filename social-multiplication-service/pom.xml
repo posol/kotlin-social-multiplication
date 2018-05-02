@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.posol</groupId>
-    <artifactId>social-multiplication</artifactId>
+    <artifactId>social-multiplication-service</artifactId>
     <version>1.0-social-multiplication</version>
     <packaging>jar</packaging>
 
-    <name>social-multiplication</name>
+    <name>social-multiplication-service</name>
     <description>Social multiplication app</description>
 
     <parent>
@@ -27,6 +27,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
