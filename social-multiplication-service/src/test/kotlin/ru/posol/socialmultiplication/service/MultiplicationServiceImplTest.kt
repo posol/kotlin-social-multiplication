@@ -3,18 +3,19 @@ package ru.posol.socialmultiplication.service
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.mockito.BDDMockito.given
-import org.mockito.BDDMockito.verify
+import org.mockito.ArgumentMatchers
+import org.mockito.BDDMockito.*
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import ru.posol.socialmultiplication.domain.Multiplication
 import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
 import ru.posol.socialmultiplication.domain.User
+import ru.posol.socialmultiplication.event.EventDispatcher
+import ru.posol.socialmultiplication.event.MultiplicationSolvedEvent
+import ru.posol.socialmultiplication.repository.MultiplicationRepository
 import ru.posol.socialmultiplication.repository.MultiplicationResultAttemptRepository
 import ru.posol.socialmultiplication.repository.UserRepository
-import org.mockito.*
-import ru.posol.socialmultiplication.repository.MultiplicationRepository
+
 
 class MultiplicationServiceImplTest {
 
@@ -32,11 +33,14 @@ class MultiplicationServiceImplTest {
     @Mock
     lateinit var  multiplicationRepository: MultiplicationRepository
 
+    @Mock
+    lateinit var  eventDispatcher: EventDispatcher
+
     @Before
     fun setUp() {
         // With this call to initMocks we tell Mockito to process the annotations
         MockitoAnnotations.initMocks(this)
-        multiplicationServiceImpl = MultiplicationServiceImpl(randomGeneratorService,attemptRepository,userRepository,multiplicationRepository);
+        multiplicationServiceImpl = MultiplicationServiceImpl(randomGeneratorService,attemptRepository,userRepository,multiplicationRepository,eventDispatcher);
     }
 
     @Test
@@ -60,6 +64,7 @@ class MultiplicationServiceImplTest {
         val attempt = MultiplicationResultAttempt(user = user,multiplication =  multiplication,
                 resultAttempt = 3000,correct = false)
         val verifiedAttempt = attempt.copy(correct = true)
+        val event = MultiplicationSolvedEvent(verifiedAttempt.id, verifiedAttempt.user.id, verifiedAttempt.correct)
         given(userRepository.findByAlias("posol")).willReturn(null);
         given(multiplicationRepository.findByFactorAAndFactorB(50,60)).willReturn(null);
 
@@ -70,6 +75,7 @@ class MultiplicationServiceImplTest {
         assertThat(attemptResult).isTrue()
         // real call is not executed, only verifying that the mock objects are called with those arguments
         verify(attemptRepository).save(verifiedAttempt)
+        verify(eventDispatcher).send(eq(event))
     }
 
     @Test
@@ -79,6 +85,7 @@ class MultiplicationServiceImplTest {
         val user = User(alias = "posol")
         val attempt = MultiplicationResultAttempt(user = user,multiplication =  multiplication,
                 resultAttempt = 3010,correct = false)
+        val event = MultiplicationSolvedEvent(attempt.id, attempt.user.id, attempt.correct)
         given(userRepository.findByAlias("posol")).willReturn(null);
         given(multiplicationRepository.findByFactorAAndFactorB(50,60)).willReturn(null);
 
@@ -89,6 +96,7 @@ class MultiplicationServiceImplTest {
         assertThat(attemptResult).isFalse()
         // real call is not executed, only verifying that the mock objects are called with those arguments
         verify(attemptRepository).save(attempt)
+        verify(eventDispatcher).send(eq(event))
     }
 
     @Test

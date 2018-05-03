@@ -6,6 +6,8 @@ import org.springframework.util.Assert
 import ru.posol.socialmultiplication.domain.Multiplication
 import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
 import ru.posol.socialmultiplication.domain.User
+import ru.posol.socialmultiplication.event.EventDispatcher
+import ru.posol.socialmultiplication.event.MultiplicationSolvedEvent
 import ru.posol.socialmultiplication.repository.MultiplicationRepository
 import ru.posol.socialmultiplication.repository.MultiplicationResultAttemptRepository
 import ru.posol.socialmultiplication.repository.UserRepository
@@ -20,7 +22,9 @@ class MultiplicationServiceImpl(
         @Autowired
         val userRepository: UserRepository,
         @Autowired
-        val multiplicationRepository: MultiplicationRepository
+        val multiplicationRepository: MultiplicationRepository,
+        @Autowired
+        val eventDispatcher: EventDispatcher
 
 ) : MultiplicationService {
 
@@ -50,6 +54,9 @@ class MultiplicationServiceImpl(
 
         // Stores the attempt
         attemptRepository.save(checkedAttempt);
+
+        // Communicates the result via Event
+        eventDispatcher.send(MultiplicationSolvedEvent(checkedAttempt.id, checkedAttempt.user.id, checkedAttempt.correct))
 
         return isCorrect
     }

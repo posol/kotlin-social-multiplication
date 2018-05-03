@@ -12,15 +12,6 @@ class SocialMultiplicationApplication
 
 val logger = LoggerFactory.getLogger(SocialMultiplicationApplication::class.java)
 
-@Bean
-fun init(): CommandLineRunner {
-    return CommandLineRunner {
-        //FIXME why not work
-        val test = Multiplication(1, 2)
-        logger.error("test - $test");
-    }
-}
-
 fun main(args: Array<String>) {
     val test = Multiplication(1, 2)
     logger.error("test - $test");
