@@ -1,10 +1,10 @@
-package ru.posol.socialmultiplication.controller
+package ru.posol.microservice.multiplication.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
-import ru.posol.socialmultiplication.service.MultiplicationService
+import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
+import ru.posol.microservice.multiplication.service.MultiplicationService
 
 @RestController
 @RequestMapping("/results")

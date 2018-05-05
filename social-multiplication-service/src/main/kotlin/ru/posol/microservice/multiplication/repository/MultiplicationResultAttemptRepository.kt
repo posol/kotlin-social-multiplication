@@ -1,7 +1,7 @@
-package ru.posol.socialmultiplication.repository
+package ru.posol.microservice.multiplication.repository
 
 import org.springframework.data.repository.CrudRepository
-import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
+import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
 
 /**
  * This interface allow us to store and retrieve attempts

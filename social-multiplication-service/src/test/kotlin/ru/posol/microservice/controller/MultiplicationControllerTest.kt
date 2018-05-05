@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication.controller
+package ru.posol.microservice.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
@@ -15,8 +15,9 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import ru.posol.socialmultiplication.domain.Multiplication
-import ru.posol.socialmultiplication.service.MultiplicationService
+import ru.posol.microservice.multiplication.controller.MultiplicationController
+import ru.posol.microservice.multiplication.domain.Multiplication
+import ru.posol.microservice.multiplication.service.MultiplicationService
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(MultiplicationController::class)

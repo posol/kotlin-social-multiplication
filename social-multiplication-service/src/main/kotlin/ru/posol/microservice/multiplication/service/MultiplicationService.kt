@@ -1,7 +1,7 @@
-package ru.posol.socialmultiplication.service
+package ru.posol.microservice.multiplication.service
 
-import ru.posol.socialmultiplication.domain.Multiplication
-import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
+import ru.posol.microservice.multiplication.domain.Multiplication
+import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
 
 
 interface MultiplicationService {

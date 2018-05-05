@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication
+package ru.posol.microservice
 
 import org.junit.Test
 import org.junit.runner.RunWith

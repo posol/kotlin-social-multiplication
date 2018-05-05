@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication.controller
+package ru.posol.microservice.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions
@@ -17,10 +17,11 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import ru.posol.socialmultiplication.domain.Multiplication
-import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
-import ru.posol.socialmultiplication.domain.User
-import ru.posol.socialmultiplication.service.MultiplicationService
+import ru.posol.microservice.multiplication.controller.MultiplicationResultAttemptController
+import ru.posol.microservice.multiplication.domain.Multiplication
+import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
+import ru.posol.microservice.multiplication.domain.User
+import ru.posol.microservice.multiplication.service.MultiplicationService
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(MultiplicationResultAttemptController::class)
@@ -74,7 +75,7 @@ class MultiplicationResultAttemptControllerTest {
         // given
         val user = User(alias = "posol")
         val multiplication = Multiplication(50, 70)
-        val attempt = MultiplicationResultAttempt(user = user, multiplication = multiplication, resultAttempt = 3500,correct = correct)
+        val attempt = MultiplicationResultAttempt(user = user, multiplication = multiplication, resultAttempt = 3500, correct = correct)
         val copyAttempt = attempt.copy()
 
         // checkAttempt function is only taking a Non-Null parameter! However, in Mockito, any() will

@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication.configuration
+package ru.posol.microservice.multiplication.configuration
 
 import org.springframework.amqp.core.TopicExchange
 import org.springframework.amqp.rabbit.connection.ConnectionFactory

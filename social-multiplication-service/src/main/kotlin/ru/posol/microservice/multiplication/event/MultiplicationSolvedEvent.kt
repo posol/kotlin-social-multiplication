@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication.event
+package ru.posol.microservice.multiplication.event
 
 import java.io.Serializable
 

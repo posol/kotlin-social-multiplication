@@ -1,16 +1,16 @@
-package ru.posol.socialmultiplication.service
+package ru.posol.microservice.multiplication.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.util.Assert
-import ru.posol.socialmultiplication.domain.Multiplication
-import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
-import ru.posol.socialmultiplication.domain.User
-import ru.posol.socialmultiplication.event.EventDispatcher
-import ru.posol.socialmultiplication.event.MultiplicationSolvedEvent
-import ru.posol.socialmultiplication.repository.MultiplicationRepository
-import ru.posol.socialmultiplication.repository.MultiplicationResultAttemptRepository
-import ru.posol.socialmultiplication.repository.UserRepository
+import ru.posol.microservice.multiplication.domain.Multiplication
+import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
+import ru.posol.microservice.multiplication.domain.User
+import ru.posol.microservice.multiplication.event.EventDispatcher
+import ru.posol.microservice.multiplication.event.MultiplicationSolvedEvent
+import ru.posol.microservice.multiplication.repository.MultiplicationRepository
+import ru.posol.microservice.multiplication.repository.MultiplicationResultAttemptRepository
+import ru.posol.microservice.multiplication.repository.UserRepository
 import javax.transaction.Transactional
 
 @Service

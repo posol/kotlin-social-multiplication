@@ -1,8 +1,10 @@
-package ru.posol.socialmultiplication.service
+package ru.posol.microservice.service
 
 import org.assertj.core.api.Assertions
 import org.junit.Before
 import org.junit.Test
+import ru.posol.microservice.multiplication.service.RandomGeneratorService
+import ru.posol.microservice.multiplication.service.RandomGeneratorServiceImpl
 
 
 class RandomGeneratorServiceImplTest {

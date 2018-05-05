@@ -1,7 +1,7 @@
-package ru.posol.socialmultiplication.repository
+package ru.posol.microservice.multiplication.repository
 
 import org.springframework.data.repository.CrudRepository
-import ru.posol.socialmultiplication.domain.User
+import ru.posol.microservice.multiplication.domain.User
 
 /**
  * This interface allows us to save and retrieve Users

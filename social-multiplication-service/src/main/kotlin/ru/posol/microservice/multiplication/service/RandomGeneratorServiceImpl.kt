@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication.service
+package ru.posol.microservice.multiplication.service
 
 import org.springframework.stereotype.Service
 import java.util.*

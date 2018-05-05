@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication.domain
+package ru.posol.microservice.multiplication.domain
 
 import javax.persistence.Column
 import javax.persistence.Entity

@@ -1,4 +1,4 @@
-package ru.posol.socialmultiplication.event
+package ru.posol.microservice.multiplication.event
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Autowired

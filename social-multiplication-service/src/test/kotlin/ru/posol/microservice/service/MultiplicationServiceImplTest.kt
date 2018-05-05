@@ -1,20 +1,21 @@
-package ru.posol.socialmultiplication.service
+package ru.posol.microservice.service
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.BDDMockito.*
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import ru.posol.socialmultiplication.domain.Multiplication
-import ru.posol.socialmultiplication.domain.MultiplicationResultAttempt
-import ru.posol.socialmultiplication.domain.User
-import ru.posol.socialmultiplication.event.EventDispatcher
-import ru.posol.socialmultiplication.event.MultiplicationSolvedEvent
-import ru.posol.socialmultiplication.repository.MultiplicationRepository
-import ru.posol.socialmultiplication.repository.MultiplicationResultAttemptRepository
-import ru.posol.socialmultiplication.repository.UserRepository
+import ru.posol.microservice.multiplication.domain.Multiplication
+import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
+import ru.posol.microservice.multiplication.domain.User
+import ru.posol.microservice.multiplication.event.EventDispatcher
+import ru.posol.microservice.multiplication.event.MultiplicationSolvedEvent
+import ru.posol.microservice.multiplication.repository.MultiplicationRepository
+import ru.posol.microservice.multiplication.repository.MultiplicationResultAttemptRepository
+import ru.posol.microservice.multiplication.repository.UserRepository
+import ru.posol.microservice.multiplication.service.MultiplicationServiceImpl
+import ru.posol.microservice.multiplication.service.RandomGeneratorService
 
 
 class MultiplicationServiceImplTest {
@@ -40,7 +41,7 @@ class MultiplicationServiceImplTest {
     fun setUp() {
         // With this call to initMocks we tell Mockito to process the annotations
         MockitoAnnotations.initMocks(this)
-        multiplicationServiceImpl = MultiplicationServiceImpl(randomGeneratorService,attemptRepository,userRepository,multiplicationRepository,eventDispatcher);
+        multiplicationServiceImpl = MultiplicationServiceImpl(randomGeneratorService, attemptRepository, userRepository, multiplicationRepository, eventDispatcher);
     }
 
     @Test
@@ -61,8 +62,8 @@ class MultiplicationServiceImplTest {
         // given
         val multiplication = Multiplication(50, 60)
         val user = User(alias = "posol")
-        val attempt = MultiplicationResultAttempt(user = user,multiplication =  multiplication,
-                resultAttempt = 3000,correct = false)
+        val attempt = MultiplicationResultAttempt(user = user, multiplication = multiplication,
+                resultAttempt = 3000, correct = false)
         val verifiedAttempt = attempt.copy(correct = true)
         val event = MultiplicationSolvedEvent(verifiedAttempt.id, verifiedAttempt.user.id, verifiedAttempt.correct)
         given(userRepository.findByAlias("posol")).willReturn(null);
@@ -83,8 +84,8 @@ class MultiplicationServiceImplTest {
         // given
         val multiplication = Multiplication(50, 60)
         val user = User(alias = "posol")
-        val attempt = MultiplicationResultAttempt(user = user,multiplication =  multiplication,
-                resultAttempt = 3010,correct = false)
+        val attempt = MultiplicationResultAttempt(user = user, multiplication = multiplication,
+                resultAttempt = 3010, correct = false)
         val event = MultiplicationSolvedEvent(attempt.id, attempt.user.id, attempt.correct)
         given(userRepository.findByAlias("posol")).willReturn(null);
         given(multiplicationRepository.findByFactorAAndFactorB(50,60)).willReturn(null);
@@ -104,8 +105,8 @@ class MultiplicationServiceImplTest {
         // given
         val multiplication = Multiplication(50, 60)
         val user = User(alias = "posol")
-        val attempt1 = MultiplicationResultAttempt(user = user,multiplication =  multiplication,
-                resultAttempt = 3010,correct = false)
+        val attempt1 = MultiplicationResultAttempt(user = user, multiplication = multiplication,
+                resultAttempt = 3010, correct = false)
         val attempt12 = attempt1.copy(resultAttempt = 3051)
         val latestAttempts = listOf(attempt1,attempt12)
         given(userRepository.findByAlias("posol")).willReturn(null);
