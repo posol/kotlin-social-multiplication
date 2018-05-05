@@ -1,6 +1,7 @@
 package ru.posol.microservice.gamification.domain
 
 import javax.persistence.Column
+import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
@@ -8,6 +9,7 @@ import javax.persistence.Id
  * This class represents the Score linked to an attempt in the game,
  * with an associated user and the timestamp in which the score is registered.
  */
+@Entity
 data class ScoreCard(
         @Id
         @GeneratedValue
