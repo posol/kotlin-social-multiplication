@@ -1,4 +1,4 @@
-package ru.posol.gamificationservice
+package ru.posol.microservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
