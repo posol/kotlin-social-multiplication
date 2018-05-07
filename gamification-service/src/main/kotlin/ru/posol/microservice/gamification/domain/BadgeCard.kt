@@ -18,5 +18,5 @@ data class BadgeCard(
         val badgeId: Long = 0,
         val userId: Long = 0,
         val badgeTimestamp: Long = 0,
-        val badge: Badge? = null
+        val badge: Badge = Badge.NO_BADGE
 )

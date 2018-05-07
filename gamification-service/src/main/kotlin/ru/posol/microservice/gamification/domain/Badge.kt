@@ -5,6 +5,8 @@ package ru.posol.microservice.gamification.domain
  */
 enum class Badge {
 
+    NO_BADGE,
+
     // Badges depending on score
     BRONZE_MULTIPLICATOR,
     SILVER_MULTIPLICATOR,
