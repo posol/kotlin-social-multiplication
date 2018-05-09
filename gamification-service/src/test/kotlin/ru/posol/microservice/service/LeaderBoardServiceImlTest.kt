@@ -6,10 +6,10 @@ import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.springframework.stereotype.Service
 import ru.posol.microservice.gamification.domain.LeaderBoardRow
 import ru.posol.microservice.gamification.repository.ScoreCardRepository
 import ru.posol.microservice.gamification.service.LeaderBoardServiceIml
-
 
 class LeaderBoardServiceImlTest {
 

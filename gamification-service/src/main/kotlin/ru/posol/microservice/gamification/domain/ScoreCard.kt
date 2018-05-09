@@ -15,12 +15,16 @@ data class ScoreCard(
         @GeneratedValue
         @Column(name = "CARD_ID")
         val cardId: Long = 0,
+
         @Column(name = "USER_ID")
         val userId: Long = 0,
+
         @Column(name = "ATTEMPT_ID")
         val attemptId: Long = 0,
+
         @Column(name = "SCORE_TS")
         val scoreTimestamp: Long = 0,
+
         @Column(name = "SCORE")
         val score: Int = DEFAULT_SCORE
 

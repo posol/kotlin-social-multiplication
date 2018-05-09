@@ -16,6 +16,7 @@ data class BadgeCard(
         @GeneratedValue
         @Column(name = "BADGE_ID")
         val badgeId: Long = 0,
+
         val userId: Long = 0,
         val badgeTimestamp: Long = 0,
         val badge: Badge = Badge.NO_BADGE
