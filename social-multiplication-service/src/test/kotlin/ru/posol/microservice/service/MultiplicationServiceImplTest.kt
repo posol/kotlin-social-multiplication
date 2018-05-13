@@ -76,7 +76,7 @@ class MultiplicationServiceImplTest {
         assertThat(attemptResult).isTrue()
         // real call is not executed, only verifying that the mock objects are called with those arguments
         verify(attemptRepository).save(verifiedAttempt)
-        verify(eventDispatcher).send(eq(event))
+        verify(eventDispatcher).send(event)
     }
 
     @Test
@@ -97,7 +97,7 @@ class MultiplicationServiceImplTest {
         assertThat(attemptResult).isFalse()
         // real call is not executed, only verifying that the mock objects are called with those arguments
         verify(attemptRepository).save(attempt)
-        verify(eventDispatcher).send(eq(event))
+        verify(eventDispatcher).send(event)
     }
 
     @Test
@@ -118,7 +118,7 @@ class MultiplicationServiceImplTest {
 
         // then
         assertThat(latestAttemptsResult).isEqualTo(latestAttempts)
-
     }
+
 
 }

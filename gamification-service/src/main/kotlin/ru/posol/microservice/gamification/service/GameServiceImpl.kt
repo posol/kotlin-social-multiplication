@@ -45,7 +45,7 @@ class GameServiceImpl(
     obtained
      * to give new badges in case their conditions are met.
      */
-    fun processForBadges(userId: Long, attemptId: Long): List<BadgeCard> {
+    private fun processForBadges(userId: Long, attemptId: Long): List<BadgeCard> {
         val badgeCards: MutableList<BadgeCard> = mutableListOf()
         val totalScore = scoreCardRepository.getTotalScoreForUser(userId)
         log.info("New score for user $userId is $totalScore")

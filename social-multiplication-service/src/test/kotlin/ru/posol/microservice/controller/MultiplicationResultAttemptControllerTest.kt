@@ -1,7 +1,7 @@
 package ru.posol.microservice.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,6 +22,7 @@ import ru.posol.microservice.multiplication.domain.Multiplication
 import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
 import ru.posol.microservice.multiplication.domain.User
 import ru.posol.microservice.multiplication.service.MultiplicationService
+
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(MultiplicationResultAttemptController::class)
@@ -57,8 +58,8 @@ class MultiplicationResultAttemptControllerTest {
         val response = mvc.perform(get("/results").param("alias", "posol")).andReturn().response
 
         // then
-        Assertions.assertThat(response.status).isEqualTo(HttpStatus.OK.value())
-        Assertions.assertThat(response.contentAsString).isEqualTo(jsonResultAttemptList.write(recentAttempts).json)
+        assertThat(response.status).isEqualTo(HttpStatus.OK.value())
+        assertThat(response.contentAsString).isEqualTo(jsonResultAttemptList.write(recentAttempts).json)
     }
 
     @Test
@@ -84,12 +85,27 @@ class MultiplicationResultAttemptControllerTest {
                 ?: attempt)).willReturn(correct)
 
         // when
-        val response = mvc.perform(post("/results").contentType(MediaType.APPLICATION_JSON).
-                content(jsonResult.write(attempt).json)).andReturn().response
+        val response = mvc.perform(post("/results").contentType(MediaType.APPLICATION_JSON).content(jsonResult.write(attempt).json)).andReturn().response
 
         // then
-        Assertions.assertThat(response.status).isEqualTo(HttpStatus.OK.value())
-        Assertions.assertThat(response.contentAsString).isEqualTo(jsonResponse.write(copyAttempt).json)
+        assertThat(response.status).isEqualTo(HttpStatus.OK.value())
+        assertThat(response.contentAsString).isEqualTo(jsonResponse.write(copyAttempt).json)
+    }
+
+    @Test
+    fun getResultByIdTest() {
+        // given
+        val user = User(alias = "posol")
+        val multiplication = Multiplication(50, 70)
+        val attempt = MultiplicationResultAttempt(user = user, multiplication = multiplication, resultAttempt = 3500, correct = true)
+        given(multiplicationService.getResultById(4L)).willReturn(attempt)
+
+        // when
+        val response = mvc.perform(get("/results/4")).andReturn().response
+
+        // then
+        assertThat(response.status).isEqualTo(HttpStatus.OK.value())
+        assertThat(response.contentAsString).isEqualTo(jsonResultAttempt.write(attempt).json)
     }
 
 }

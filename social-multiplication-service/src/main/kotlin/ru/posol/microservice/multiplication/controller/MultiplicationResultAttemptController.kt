@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*
 import ru.posol.microservice.multiplication.domain.MultiplicationResultAttempt
 import ru.posol.microservice.multiplication.service.MultiplicationService
 
+
 @RestController
 @RequestMapping("/results")
 class MultiplicationResultAttemptController(@Autowired val multiplicationService: MultiplicationService) {
@@ -22,5 +23,9 @@ class MultiplicationResultAttemptController(@Autowired val multiplicationService
         return ResponseEntity.ok(multiplicationService.getStatsForUser(alias))
     }
 
+    @GetMapping("/{resultId}")
+    fun getResultById(@PathVariable("resultId") resultId: Long): ResponseEntity<MultiplicationResultAttempt> {
+        return ResponseEntity.ok(multiplicationService.getResultById(resultId))
+    }
 
 }

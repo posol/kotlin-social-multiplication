@@ -63,6 +63,5 @@ class MultiplicationServiceImpl(
 
     override fun getStatsForUser(userAlias: String) = attemptRepository.findTop5ByUserAliasOrderByIdDesc(userAlias)
 
-
-
+    override fun getResultById(resultId: Long): MultiplicationResultAttempt = attemptRepository.findById(resultId).get()
 }

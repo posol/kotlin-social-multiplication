@@ -21,4 +21,5 @@ interface MultiplicationService {
 
     fun getStatsForUser(userAlias: String): List<MultiplicationResultAttempt>
 
+    fun getResultById(resultId: Long): MultiplicationResultAttempt
 }
