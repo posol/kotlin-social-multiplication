@@ -3,6 +3,7 @@ package ru.posol.microservice.gamification.service
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import ru.posol.microservice.gamification.client.MultiplicationResultAttemptClient
 import ru.posol.microservice.gamification.domain.Badge
 import ru.posol.microservice.gamification.domain.BadgeCard
 import ru.posol.microservice.gamification.domain.GameStats
@@ -16,10 +17,16 @@ class GameServiceImpl(
         @Autowired
         val scoreCardRepository: ScoreCardRepository,
         @Autowired
-        val badgeCardRepository: BadgeCardRepository
+        val badgeCardRepository: BadgeCardRepository,
+        @Autowired
+        val attemptClient: MultiplicationResultAttemptClient
 ) : GameService {
 
     val log = LoggerFactory.getLogger(GameServiceImpl::class.java)
+
+    companion object {
+        val LUCKY_NUMBER = 42
+    }
 
     override fun newAttemptForUser(userId: Long, attemptId: Long, correct: Boolean): GameStats {
         // For the first version we'll give points only if it's correct
@@ -69,6 +76,14 @@ class GameServiceImpl(
             val firstWonBadge = giveBadgeToUser(Badge.FIRST_WON, userId)
             badgeCards.add(firstWonBadge)
         }
+
+        // Lucky number badge
+        val attempt = attemptClient.retrieveMultiplicationResultAttemptbyId(attemptId)
+        if (!containsBadge(badgeCards, Badge.LUCKY_NUMBER) && (LUCKY_NUMBER === attempt?.multiplicationFactorA || LUCKY_NUMBER === attempt?.multiplicationFactorB)) {
+            val luckyNumberBadge = giveBadgeToUser(Badge.LUCKY_NUMBER, userId)
+            badgeCards.add(luckyNumberBadge)
+        }
+
         return badgeCards
     }
 
