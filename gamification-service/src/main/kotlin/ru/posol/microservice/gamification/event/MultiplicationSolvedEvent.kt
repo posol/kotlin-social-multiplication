@@ -9,7 +9,7 @@ multiplication.domain.Multiplication}
 information about the multiplication.
  */
 data class MultiplicationSolvedEvent(
-        val multiplicationResultAttemptId: Long,
-        val userId: Long,
-        val correct: Boolean
+        val multiplicationResultAttemptId: Long = 0,
+        val userId: Long = 0,
+        val correct: Boolean = false
 ) : Serializable

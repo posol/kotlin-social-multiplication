@@ -1,5 +1,6 @@
 package ru.posol.microservice.multiplication.event
 
+import org.slf4j.LoggerFactory
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -16,14 +17,15 @@ class EventDispatcher(
         @Value("\${multiplication.exchange}")
         val multiplicationExchange: String,
         // The routing key to use to send this particular event
-        @Value("\${{multiplication.solved.key}")
-        val  multiplicationSolvedRoutingKey: String
+        @Value("\${multiplication.solved.key}")
+        val multiplicationSolvedRoutingKey: String
 ) {
 
+    val log = LoggerFactory.getLogger(EventDispatcher::class.java)
+
     fun send(multiplicationSolvedEvent: MultiplicationSolvedEvent) {
-        rabbitTemplate.convertAndSend(multiplicationExchange,
-                                      multiplicationSolvedRoutingKey,
-                                      multiplicationSolvedEvent)
+        log.info("Multiplication Solved Event sended: ${multiplicationSolvedEvent.multiplicationResultAttemptId}")
+        rabbitTemplate.convertAndSend(multiplicationExchange, multiplicationSolvedRoutingKey, multiplicationSolvedEvent)
     }
 
 }

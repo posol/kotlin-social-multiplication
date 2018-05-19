@@ -17,7 +17,7 @@ class EventHandler(
         val gameService: GameService
 ) {
 
-    val log = LoggerFactory.getLogger(GameServiceImpl::class.java)
+    val log = LoggerFactory.getLogger(EventHandler::class.java)
 
     @RabbitListener(queues = arrayOf("\${multiplication.queue}"))
     fun handleMultiplicationSolved(event: MultiplicationSolvedEvent) {

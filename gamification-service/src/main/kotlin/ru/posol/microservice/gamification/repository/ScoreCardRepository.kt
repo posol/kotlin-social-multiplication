@@ -18,8 +18,7 @@ interface ScoreCardRepository : CrudRepository<ScoreCard, Long> {
     score should be retrieved
      * @return the total score for the given user
      */
-    @Query(""""SELECT SUM(s.score) FROM ru.posol.microservice.gamification.domain.ScoreCard s
-                     WHERE s.userId = :userId GROUP BY s.userId""")
+    @Query("SELECT SUM(s.score) FROM ru.posol.microservice.gamification.domain.ScoreCard s WHERE s.userId = :userId GROUP BY s.userId")
     fun getTotalScoreForUser(@Param("userId") userId: Long): Int
 
     /**
@@ -28,9 +27,12 @@ interface ScoreCardRepository : CrudRepository<ScoreCard, Long> {
     results, using the userId and the aggregation of the score for a given user)
      * @return the leader board, sorted by highest score first.
      */
-    @Query("""SELECT ru.posol.microservice.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score))
+    /*@Query("""SELECT ru.posol.microservice.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score))
                     FROM  ru.posol.microservice.gamification.domain.ScoreCard s
-                    GROUP BY s.userId ORDER BY SUM(s.score) DESC""")
+                    GROUP BY s.userId ORDER BY SUM(s.score) DESC""")*/
+    @Query("SELECT NEW ru.posol.microservice.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) " +
+            "FROM ru.posol.microservice.gamification.domain.ScoreCard s " +
+            "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
     fun findFirst10(): List<LeaderBoardRow>
 
     /**
