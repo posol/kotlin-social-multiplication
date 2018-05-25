@@ -17,9 +17,9 @@ zuul:
       path: /stats/**
       url: http://localhost:8081/stats
 
-endpoints:
-  trace:
-    sensitive: false
+#endpoints:
+  #trace:
+    #sensitive: false
 
 ribbon:
   eureka:
