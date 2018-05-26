@@ -29,7 +29,6 @@ class EventHandler(
             // Avoids the event to be re-queued and reprocessed.
             throw AmqpRejectAndDontRequeueException(e)
         }
-
     }
 
 }
